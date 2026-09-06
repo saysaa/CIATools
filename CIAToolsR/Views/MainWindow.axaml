@@ -9,10 +9,9 @@
         x:Class="CIAToolsR.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/icon.ico"
-        Title="{Binding Current_os, StringFormat='CIAToolsR - {0}.V10.0.0'}"
+        Title="{Binding Current_os, StringFormat='CIAToolsR - {0}.V10.1.0'}"
         DragDrop.AllowDrop="True"
 
-        Background="Transparent"
         TransparencyLevelHint="AcrylicBlur, Blur, Transparent"
         TransparencyBackgroundFallback="#1A1A1E">
 
@@ -60,6 +59,26 @@
             <Setter Property="Background" Value="#FFAA1A"/>
         </Style>
 
+        <Style Selector="Button.IconMenuButton">
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="6"/>
+        </Style>
+
+        <Style Selector="Button.IconMenuButton /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <Style Selector="Button.IconMenuButton:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#20FFFFFF"/>
+        </Style>
+
+        <Style Selector="Button.IconMenuButton:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#30FFFFFF"/>
+        </Style>
+
         <Style Selector="Button.btn-cancel">
             <Setter Property="Foreground" Value="#E0E0E0"/>
             <Setter Property="FontSize" Value="14"/>
@@ -90,7 +109,7 @@
             
             <!-- HEADER -->
             <Grid Grid.Row="0">
-                <TextBlock Text="CIATools" 
+                <TextBlock Text="CIAToolsR" 
                            FontSize="36" 
                            Foreground="White"
                            FontFamily="{StaticResource Montserrat.Extrabold}" 
@@ -103,10 +122,8 @@
                 <Rectangle Height="1" Fill="#20FFFFFF" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="25,0"/>
             </Grid>
 
-            <!-- ZONE CENTRALE (ROW 1) -->
             <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                 
-                <!-- 1. DRAG & DROP PANEL -->
                 <Border Name="DropZonePanel" 
                         Classes="drop-zone" 
                         Height="220" 
@@ -130,7 +147,6 @@
                     </StackPanel>
                 </Border>
 
-                <!-- 2. PANNEAU DE CONFIRMATION -->
                 <Border Name="ConfirmationPanel" 
                         Background="#20FFFFFF" 
                         BorderBrush="#FF9E00" 
@@ -173,7 +189,6 @@
                     </StackPanel>
                 </Border>
 
-                <!-- 3. PANNEAU DE CHARGEMENT (COMPILING) -->
                 <Border Name="LoadingPanel" 
                         Background="#20FFFFFF" 
                         BorderBrush="#FF9E00" 
@@ -194,7 +209,6 @@
                                    FontWeight="Bold" 
                                    HorizontalAlignment="Center"/>
 
-                        <!-- Barre de chargement animée -->
                         <ProgressBar IsIndeterminate="True" 
                                      Width="200" 
                                      Height="4" 
@@ -206,7 +220,6 @@
 
             </Grid>
 
-            <!-- FOOTER (ROW 2) -->
             <Border Grid.Row="2" Background="#30000000" CornerRadius="0,0,10,10" Padding="15,0">
                 <Grid ColumnDefinitions="*, Auto">
                     <TextBlock Grid.Column="0" 
@@ -216,49 +229,50 @@
                                VerticalAlignment="Center"
                                IsVisible="{Binding Console}"/>
 
-                    <StackPanel Grid.Column="1" 
-                                Orientation="Horizontal" 
-                                VerticalAlignment="Center" 
-                                HorizontalAlignment="Right" 
-                                Spacing="4">
-                        
-                        <Menu>
-                            <MenuItem ToolTip.Tip="Tools">
-                                <MenuItem.Header>
-                                    <materialIcons:MaterialIcon Kind="WrenchOutline" IconSize="20" Foreground="#A0A0A0"/>
-                                </MenuItem.Header>
-                                <MenuItem Header="_Clean USER_FILES" Click="OnClearMenuClick"/>
-                                <MenuItem Header="_Restore AUTHOR.txt" Click="OnRestoreAuthor"/>
-                                <MenuItem Header="_Restore FILE_PATH" Click="OnRestoreFILEPATH"/>
-                                <Separator/>
-                                <CheckBox Content="Console" IsChecked="{Binding Console}"/>
-                                <CheckBox Content="Auto Close Script" IsChecked="{Binding AutoCloseScript}"/>
-                            </MenuItem>
-                        </Menu>
+        <StackPanel Orientation="Horizontal" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Right" 
+                    Spacing="4">
 
-                        <Menu>
-                            <MenuItem ToolTip.Tip="Create">
-                                <MenuItem.Header>
-                                    <materialIcons:MaterialIcon Kind="TuneVariant" IconSize="20" Foreground="#A0A0A0"/>
-                                </MenuItem.Header>
-                                <MenuItem Header="_Start RSF-Creator" Click="OnRSFCREATOR"/>
-                                <MenuItem Header="_Start SMDH-Creator" Click="OnSMDHCREATOR"/>
-                                <Separator/>
-                                <MenuItem Header="_Set Author name" Click="OnSetAuthorName"/>
-                            </MenuItem>
-                        </Menu>
+            <!-- Tools -->
+            <Button Classes="IconMenuButton" ToolTip.Tip="Tools">
+                <materialIcons:MaterialIcon Kind="WrenchOutline" IconSize="20" Foreground="#C0C0C0"/>
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuItem Header="_Clean USER_FILES" Click="OnClearMenuClick"/>
+                        <MenuItem Header="_Restore AUTHOR.txt" Click="OnRestoreAuthor"/>
+                        <MenuItem Header="_Restore FILE_PATH" Click="OnRestoreFILEPATH"/>
+                        <Separator/>
+                        <CheckBox Content="Console" IsChecked="{Binding Console}"/>
+                        <CheckBox Content="Auto Close Script" IsChecked="{Binding AutoCloseScript}"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
 
-                        <Menu>
-                            <MenuItem ToolTip.Tip="Help">
-                                <MenuItem.Header>
-                                    <materialIcons:MaterialIcon Kind="HelpCircleOutline" IconSize="20" Foreground="#A0A0A0"/>
-                                </MenuItem.Header>
-                                <MenuItem Header="_Github" Click="OnOpenGitHubClick"/>
-                                <MenuItem Header="_Discord" Click="OnOpenDiscord"/>
-                            </MenuItem>
-                        </Menu>
-                    </StackPanel>
+            <!-- Create -->
+            <Button Classes="IconMenuButton" ToolTip.Tip="Create">
+                <materialIcons:MaterialIcon Kind="TuneVariant" IconSize="20" Foreground="#C0C0C0"/>
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuItem Header="_Start RSF-Creator" Click="OnRSFCREATOR"/>
+                        <MenuItem Header="_Start SMDH-Creator" Click="OnSMDHCREATOR"/>
+                        <Separator/>
+                        <MenuItem Header="_Set Author name" Click="OnSetAuthorName"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
 
+            <!-- Help -->
+            <Button Classes="IconMenuButton" ToolTip.Tip="Help">
+                <materialIcons:MaterialIcon Kind="HelpCircleOutline" IconSize="20" Foreground="#C0C0C0"/>
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuItem Header="_Github" Click="OnOpenGitHubClick"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+
+        </StackPanel>
                 </Grid>
             </Border>
 

@@ -1912,7 +1912,7 @@ namespace CIAToolsR.Views
 
             try
             {
-                var latestRelease = await client.Repository.Release.GetLatest("saysaa", "CIATools");
+                var latestRelease = await client.Repository.Release.GetLatest("saiitanaa", "CIATools");
 
                 if (latestRelease == null)
                     return;
@@ -2100,22 +2100,12 @@ namespace CIAToolsR.Views
 
         public void OnOpenGitHubClick(object? sender, RoutedEventArgs e)
         {
-            OpenGitHub();
+            OpenBrowser("https://github.com/saiitanaa/CIATools");
         }
 
-        public void OnOpenGitHubPointerPressed(object? sender, PointerPressedEventArgs e)
-        {
-            OpenGitHub();
-        }
-
-        private void OpenGitHub()
-        {
-            OpenBrowser("https://github.com/saysaa/CIATools");
-        }
-
-        public void OnOpenDiscord(object? sender, RoutedEventArgs e)
-        {
-            OpenBrowser("https://discord.gg/px7MGB2vhX");
+        private void OnOpenGitHubPointerPressed(object? sender, PointerPressedEventArgs e)
+{
+            OpenBrowser("https://github.com/saiitanaa/CIATools");
         }
     }
 }
