@@ -15,7 +15,7 @@ https://github.com/saysaa/CIATools/tree/smdh-creator
 ---
 
 ### OLD vs Renewed: What’s changed?
-* **Cross-platform**: Runs natively on Windows and Linux.
+* **Cross-platform**: Runs natively on Windows and Linux and macOS
 * **Clean Architecture**: Migrated to .NET MVVM, code completely rewritten.
 * **Modern Interface**: Material Design look, clean and readable.
 * **Full Control**: Integrated debug console, real-time log management, and automation options for scripts.
